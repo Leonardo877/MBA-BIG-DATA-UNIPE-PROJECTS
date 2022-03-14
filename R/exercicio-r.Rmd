@@ -1,0 +1,69 @@
+```{r}
+#Dados Enem 2019 com uma amostra de 10 mil linhas
+
+df = read.csv('enem_10k.csv', sep =';')
+print(df)
+
+```
+
+```{r}
+#Maior idade do enem entre a amostra com 10 mil linhas
+
+maior <- max(df$NU_IDADE)
+print(maior)
+```
+
+```{r}
+#idade dos participantes do Enem que nasceram na PB e que moram na cidade de João Pessoa
+
+idade <- subset(df, SG_UF_NASCIMENTO == 'PB' & NO_MUNICIPIO_RESIDENCIA == 'João Pessoa')
+print(idade$NU_IDADE)
+
+```
+```{r}
+#Idades dos participantes que nasceram na Paraíba e mora em João Pessoa em forma de gráfico
+barplot(idade$NU_IDADE)
+
+```
+
+```{r}
+#Média de idade das pessoas que fizeram Enem (Amostra com 10 mil dados)
+mediaIdade <- mean(df$NU_IDADE)
+print(mediaIdade)
+```
+```{r}
+#Instalando o pacote esquisse para gerar gráficos
+install.packages("esquisse")
+
+```
+```{r}
+library(esquisse)
+esquisser
+library(ggplot2)
+```
+
+
+```{r}
+#Utilizei o esquisse para fazer um gráfico de sexo por idade
+ggplot(df) +
+ aes(x = NU_IDADE, fill = TP_SEXO) +
+ geom_histogram(bins = 30L) +
+ scale_fill_hue(direction = 1) +
+ theme_minimal()
+(df)
+```
+```{r}
+
+#Utilizei o pacote esquisse para gerar o gráfico
+#O gráfico demonstra as notas da redação por sexo
+
+library(ggplot2)
+
+ggplot(df) +
+ aes(x = NU_NOTA_REDACAO, colour = TP_SEXO) +
+ geom_histogram(bins = 30L, fill = "#112446") +
+ scale_color_hue(direction = 1) +
+ theme_minimal()
+
+```
+```{r}
